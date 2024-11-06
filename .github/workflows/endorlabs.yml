@@ -21,11 +21,6 @@ jobs:
       id-token: write
       contents: read
     steps:
-        - name: Setup namespace Environment Variables
-          run: | 
-            NAMESPACE=$(jq -r '.inputs.tenant_name' $GITHUB_EVENT_PATH)
-            echo "::add-mask::$NAMESPACE" 
-            echo NAMESPACE=$NAMESPACE >> $GITHUB_ENV
 
         - name: Checkout Repository
           uses: actions/checkout@v3
@@ -47,9 +42,8 @@ jobs:
           with:
             namespace: ${{ github.event.inputs.tenant_name }}
             scan_summary_output_type: "table"
-            pr: "false"
+            pr: "true"
             enable_github_action_token: "true"
             scan_dependencies: "true"
             scan_secrets: "true"
             scan_git_logs: "true"
-            additional_args: "--as-default-branch --api=${{ github.event.inputs.api }} >> json.txt & cat json.txt"
