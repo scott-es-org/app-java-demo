@@ -38,7 +38,7 @@ jobs:
             
         - name: Endor Labs Workflow Dispatch
           if: ${{ github.event_name == 'workflow_dispatch' }}
-          uses: endorlabs/github-action@task/CSE-2393-linux-arm
+          uses: endorlabs/github-action@main
           with:
             namespace: ${{ github.event.inputs.tenant_name }}
             scan_summary_output_type: "table"
